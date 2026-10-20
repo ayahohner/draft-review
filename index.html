@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Draft review</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#changes">Skip to changes</a>
+    <header>
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">±</span>
+        <div>
+          <h1>Draft review</h1>
+          <p>Compare drafts <span class="muted">/ local review</span></p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="save-status" role="status">Loading…</span
+        ><button id="export" class="primary">Export review</button>
+      </div>
+    </header>
+    <div id="error" role="alert" hidden></div>
+    <div class="workspace">
+      <aside>
+        <div class="side-top">
+          <h2>Review changes</h2>
+          <p id="summary">Loading your draft…</p>
+          <progress
+            id="progress"
+            value="0"
+            max="1"
+            aria-label="Changes reviewed"
+          ></progress>
+        </div>
+        <nav id="sections" aria-label="Document sections"></nav>
+        <div class="side-bottom">
+          <p>
+            ✓ Accept is selected by default.<br />× Reject keeps your
+            original.<br />Edit replaces the proposed text.
+          </p>
+          <details>
+            <summary>Keyboard shortcuts</summary>
+            <p>
+              <kbd>J</kbd> next · <kbd>K</kbd> previous<br /><kbd>A</kbd> accept
+              · <kbd>R</kbd> reject<br /><kbd>E</kbd> edit ·
+              <kbd>N</kbd> note<br />Accept / reject shortcuts advance.
+            </p>
+          </details>
+          <p id="output-path"></p>
+        </div>
+      </aside>
+      <main id="changes" tabindex="-1">
+        <div class="toolbar">
+          <div class="view-controls">
+            <button id="diff-view" aria-pressed="true">Review diff</button
+            ><button id="result-view" aria-pressed="false">Read result</button>
+          </div>
+          <label
+            >Show
+            <select id="filter">
+              <option value="all">All changes</option>
+              <option value="pending">Not reviewed</option>
+              <option value="notes">With notes</option>
+              <option value="reject">Rejected</option>
+              <option value="edit">Edited</option>
+            </select></label
+          ><label class="context-toggle"
+            ><input type="checkbox" id="context" /> Unchanged text</label
+          >
+          <div class="navigate">
+            <button id="previous" aria-label="Previous change">↑</button
+            ><span id="position">—</span
+            ><button id="next" aria-label="Next change">↓</button>
+          </div>
+        </div>
+        <div id="review-list"></div>
+        <pre id="result" hidden></pre>
+      </main>
+    </div>
+    <dialog id="export-dialog">
+      <form method="dialog">
+        <button class="close" aria-label="Close export dialog">×</button>
+      </form>
+      <h2>Save your review</h2>
+      <p>
+        Your decisions and edits are saved locally as you work. Notes are
+        instructions for the next revision.
+      </p>
+      <div class="export-buttons">
+        <button id="download-json" class="primary">Download review JSON</button
+        ><button id="download-md">Download resulting Markdown</button>
+      </div>
+      <p class="muted">
+        Share the review JSON with your editor or writing assistant to apply
+        decisions and address notes. The Markdown already includes your direct
+        edits.
+      </p>
+      <p id="export-path" class="path"></p>
+    </dialog>
+  </body>
+</html>

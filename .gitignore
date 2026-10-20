@@ -1,0 +1,18 @@
+# Local drafts and review output: keep private inputs in these directories.
+session/
+private/
+review.json
+reviewed.md
+feedback.md
+*.recovery.json
+
+# Runtime, tools, and local configuration.
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+.ruff_cache/
+node_modules/
+.DS_Store
+.env
+.env.*
